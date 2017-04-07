@@ -21,6 +21,7 @@
 }
 
 // Transition mixins
+/* supported in all browsers since 2012/2013 :p */
 @mixin transition($args...) {
   -webkit-transition: $args;
   -moz-transition: $args;
@@ -65,18 +66,10 @@
   }
 }
 
+
 // Media queries
 @mixin smaller($width) {
   @media screen and (max-width: $width) {
     @content;
-  }
-}
-
-// Clearfix
-@mixin clearfix {
-  &:after {
-    content: "";
-    display: block;
-    clear: both;
   }
 }
