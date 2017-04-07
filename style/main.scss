@@ -1,5 +1,7 @@
 @import "helpers";
-@import "fonts/clear-sans.css";
+
+/* Define variables \
+* ------------------------------------------------------------------------- */
 
 $field-width: 500px;
 $grid-spacing: 15px;
@@ -9,24 +11,36 @@ $tile-border-radius: 3px;
 
 $mobile-threshold: $field-width + 20px;
 
-$text-color: #776E65;
+$text-color: #404040;
 $bright-text-color: #f9f6f2;
 
 $tile-color: #eee4da;
 $tile-gold-color: #edc22e;
 $tile-gold-glow-color: lighten($tile-gold-color, 15%);
 
+$button-color: #1e456e;
+/* really the color of the "new game" button since original code has no others! 
+ * blue should be different enough to be noticed but subdued and neutral
+ * enough to not be distracting. 
+ * Dark green for the score seems good. 
+*/
+
+$score-color: #24501e; 
+
 $game-container-margin-top: 40px;
 $game-container-background: #bbada0;
 
 $transition-speed: 100ms;
 
+/* Primary layout \
+* ------------------------------------------------------------------------- */
+
 html, body {
     margin: 0;
     padding: 0;
-    background: #faf8ef;
+    background: #241709; /* thin line between chocolate and doodoo tho */
     color: $text-color;
-    font-family: "Clear Sans", sans-serif; 
+    font-family: "Open Sans", sans-serif; 
     font-size: 1.125rem; /* roughly equal to 18px */
 }
 
@@ -36,6 +50,10 @@ header {
     justify-content: space-between; 
 }
 
+/* Flexbox works well, except when start a new game the size of score-container 
+ * changes, so it shifts slightly. Is this OK or a nuisance? 
+*/
+
 h1.title {
     font-size: 3em;
     font-weight: bold;
@@ -43,45 +61,51 @@ h1.title {
     text-align: center;
 }
 
-@include keyframes(move-up) {
-  0% {
-    top: 25px;
-    opacity: 1;
-  }
+.container {
+    width: $field-width;
+    margin: 0 auto;
+}
 
-  100% {
-    top: -50px;
-    opacity: 0;
-  }
+
+@include keyframes(move-up) {
+    0% {
+        top: 25px;
+        opacity: 1;
+    }
+
+    100% {
+        top: -50px;
+        opacity: 0;
+    }
 }
 
 .score-container, .best-container {
-  $height: 25px;
+    $height: 25px;
 
-  position: relative;
-  display: inline-block;
-  background: $game-container-background;
-  padding: 15px 25px;
-  font-size: $height;
-  height: $height;
-  line-height: $height + 22px;
-  font-weight: bold;
-  border-radius: 3px;
-  color: white;
-  margin-top: 8px;
-  text-align: center;
-
-  &:after {
-    position: absolute;
-    width: 100%;
-    top: 10px;
-    left: 0;
-    text-transform: uppercase;
-    font-size: 13px;
-    line-height: 13px;
+    position: relative;
+    display: inline-block;
+    background: $score-color;
+    padding: 15px 25px;
+    font-size: $height;
+    height: $height;
+    line-height: $height + 22px;
+    font-weight: bold;
+    border-radius: 3px;
+    color: white;
+    margin-top: 8px;
     text-align: center;
-    color: $tile-color;
-  }
+
+    &:after {
+        position: absolute;
+        width: 100%;
+        top: 10px;
+        left: 0;
+        text-transform: uppercase;
+        font-size: 13px;
+        line-height: 13px;
+        text-align: center;
+        color: $tile-color;
+    }
 
   .score-addition {
     position: absolute;
@@ -98,11 +122,11 @@ h1.title {
 }
 
 .score-container:after {
-  content: "Score";
+    content: "Score";
 }
 
 .best-container:after {
-  content: "Best"
+    content: "Best"
 }
 
 p {
@@ -118,37 +142,33 @@ a {
     cursor: pointer;
 }
 
-strong {
-  &.important {
-    text-transform: uppercase;
-  }
+footer {
+    margin-top: 50px;
+    background-color: #faf8ef;
+    padding: 1em; 
 }
 
-.container {
-  width: $field-width;
-  margin: 0 auto;
-}
 
 @include keyframes(fade-in) {
-  0% {
-    opacity: 0;
-  }
+    0% {
+        opacity: 0;
+    }
 
-  100% {
-    opacity: 1;
-  }
+    100% {
+        opacity: 1;
+    }
 }
 
 // Styles for buttons
 @mixin button {
-  display: inline-block;
-  background: darken($game-container-background, 20%);
-  border-radius: 3px;
-  padding: 0 20px;
-  text-decoration: none;
-  color: $bright-text-color;
-  height: 40px;
-  line-height: 42px;
+    display: inline-block;
+    background: $button-color;
+    border-radius: 3px;
+    padding: 0 20px;
+    text-decoration: none;
+    color: $bright-text-color;
+    height: 40px;
+    line-height: 42px;
 }
 
 // Game field mixin used to render CSS at different width
@@ -189,8 +209,6 @@ strong {
         height: 60px;
         line-height: 60px;
         margin-top: 222px;
-        // height: $field-width;
-        // line-height: $field-width;
       }
 
       .lower {
@@ -201,7 +219,6 @@ strong {
       a {
         @include button;
         margin-left: 9px;
-        // margin-top: 59px;
 
 	&.keep-playing-button {
 	  display: none;
@@ -423,25 +440,21 @@ strong {
 }
 
 .tile-merged .tile-inner {
-  z-index: 20;
-  @include animation(pop 200ms ease $transition-speed);
-  @include animation-fill-mode(backwards);
+    z-index: 20;
+    @include animation(pop 200ms ease $transition-speed);
+    @include animation-fill-mode(backwards);
 }
 
 .game-intro {
-  float: left;
-  line-height: 42px;
-  margin-bottom: 0;
+    line-height: 42px;
+    margin-bottom: 0;
 }
 
 .restart-button {
-  @include button;
-  display: block;
-  text-align: center;
-  float: right;
+    @include button;
+    display: block;
+    text-align: center;
 }
 
-footer {
-  margin-top: 50px;
-}
+
 

@@ -1,11 +1,14 @@
 /* supported in all browsers since 2012/2013 :p */
-@import url(fonts/clear-sans.css);
+/* Define variables \
+* ------------------------------------------------------------------------- */
+/* Primary layout \
+* ------------------------------------------------------------------------- */
 html, body {
   margin: 0;
   padding: 0;
-  background: #faf8ef;
-  color: #776E65;
-  font-family: "Clear Sans", sans-serif;
+  background: #241709;
+  color: #404040;
+  font-family: "Open Sans", sans-serif;
   font-size: 1.125rem;
   /* roughly equal to 18px */ }
 
@@ -19,6 +22,10 @@ h1.title {
   font-weight: bold;
   margin: 0;
   text-align: center; }
+
+.container {
+  width: 500px;
+  margin: 0 auto; }
 
 @-webkit-keyframes $animation-name {
   0% {
@@ -44,7 +51,7 @@ h1.title {
 .score-container, .best-container {
   position: relative;
   display: inline-block;
-  background: #bbada0;
+  background: #24501e;
   padding: 15px 25px;
   font-size: 25px;
   height: 25px;
@@ -71,7 +78,7 @@ h1.title {
     font-size: 25px;
     line-height: 25px;
     font-weight: bold;
-    color: rgba(119, 110, 101, 0.9);
+    color: rgba(64, 64, 64, 0.9);
     z-index: 100;
     -webkit-animation: move-up 600ms ease-in;
     -moz-animation: move-up 600ms ease-in;
@@ -92,17 +99,15 @@ p {
   line-height: 1.35; }
 
 a {
-  color: #776E65;
+  color: #404040;
   font-weight: bold;
   text-decoration: underline;
   cursor: pointer; }
 
-strong.important {
-  text-transform: uppercase; }
-
-.container {
-  width: 500px;
-  margin: 0 auto; }
+footer {
+  margin-top: 50px;
+  background-color: #faf8ef;
+  padding: 1em; }
 
 @-webkit-keyframes $animation-name {
   0% {
@@ -160,7 +165,7 @@ strong.important {
       margin-top: 59px; }
     .game-container .game-message a {
       display: inline-block;
-      background: #8f7a66;
+      background: #1e456e;
       border-radius: 3px;
       padding: 0 20px;
       text-decoration: none;
@@ -476,13 +481,12 @@ strong.important {
   animation-fill-mode: backwards; }
 
 .game-intro {
-  float: left;
   line-height: 42px;
   margin-bottom: 0; }
 
 .restart-button {
   display: inline-block;
-  background: #8f7a66;
+  background: #1e456e;
   border-radius: 3px;
   padding: 0 20px;
   text-decoration: none;
@@ -490,10 +494,6 @@ strong.important {
   height: 40px;
   line-height: 42px;
   display: block;
-  text-align: center;
-  float: right; }
-
-footer {
-  margin-top: 50px; }
+  text-align: center; }
 
 /*# sourceMappingURL=main.css.map */
