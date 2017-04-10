@@ -3,7 +3,7 @@
 /* Define variables \
 * ------------------------------------------------------------------------- */
 
-$field-width: 500px;
+$field-width: 500px; 
 $grid-spacing: 15px;
 $grid-row-cells: 4;
 $tile-size: ($field-width - $grid-spacing * ($grid-row-cells + 1)) / $grid-row-cells;
@@ -35,13 +35,25 @@ $transition-speed: 100ms;
 /* Primary layout \
 * ------------------------------------------------------------------------- */
 
-html, body {
-    margin: 0;
+body {
+    margin: 0 auto;
     padding: 0;
-    background: #241709; /* thin line between chocolate and doodoo tho */
+    background: #241709; /* thin line between chocolate and doodoo color tho */
     color: $text-color;
     font-family: "Open Sans", sans-serif; 
-    font-size: 1.125rem; /* roughly equal to 18px */
+    font-size: 0.925rem; /* roughly equal to 14-15px */
+
+    width: $field-width;
+    /* all of their calculations rely on this but need a way to make fluid, 
+     * at least for mobile- anything over 550px can set at 500px fixed, or em equiv, 
+     * smaller can be set at 100% width. 
+    */
+}
+
+@media screen and (min-width: 600px) {
+    body {
+        font-size: 1.125rem; /* roughly 18px */
+    } 
 }
 
 header {
@@ -49,6 +61,7 @@ header {
     align-items: center;
     justify-content: space-between; 
 }
+
 
 /* Flexbox works well, except when start a new game the size of score-container 
  * changes, so it shifts slightly. Is this OK or a nuisance? 
@@ -59,11 +72,6 @@ h1.title {
     font-weight: bold;
     margin: 0;
     text-align: center;
-}
-
-.container {
-    width: $field-width;
-    margin: 0 auto;
 }
 
 
