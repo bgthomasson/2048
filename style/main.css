@@ -4,8 +4,7 @@ body {
   margin: 0 auto;
   padding: 0;
   background: #241709;
-  /* thin line between chocolate and doodoo color tho */
-  color: #404040;
+  color: #222222;
   font-family: "Open Sans", sans-serif;
   font-size: 0.925em;
   width: 500px; }
@@ -16,11 +15,11 @@ body {
   header {
     display: flex;
     align-items: center;
-    justify-content: space-between; } }
+    justify-content: space-between;
+    margin-top: .5em; } }
 
 h1 {
   font-size: 3em;
-  font-weight: bold;
   margin: 0;
   text-align: center; }
 
@@ -34,7 +33,6 @@ h1 {
 
 .score-container, .best-container {
   position: relative;
-  display: inline-block;
   background: #24501e;
   padding: 15px 25px;
   font-size: 1.25em;
@@ -43,7 +41,6 @@ h1 {
   font-weight: bold;
   border-radius: 3px;
   color: white;
-  margin-top: 8px;
   text-align: center; }
   .score-container:after, .best-container:after {
     position: absolute;
@@ -62,7 +59,7 @@ h1 {
     font-size: 1.25em;
     line-height: 1.25em;
     font-weight: bold;
-    color: rgba(64, 64, 64, 0.9);
+    color: rgba(34, 34, 34, 0.9);
     z-index: 100;
     animation: move-up 600ms ease-in;
     animation-fill-mode: both; }
@@ -73,19 +70,14 @@ h1 {
 .best-container:after {
   content: "Best"; }
 
-p {
-  margin-top: 0;
-  margin-bottom: .666em;
-  line-height: 1.35; }
-
 a {
-  color: #404040;
+  color: #222222;
   font-weight: bold;
   text-decoration: underline;
   cursor: pointer; }
 
 footer {
-  margin-top: 50px;
+  margin-top: 3em;
   background-color: #faf8ef;
   padding: 1em; }
 
@@ -96,17 +88,16 @@ footer {
     opacity: 1; } }
 
 button {
-  display: inline-block;
   background: #1e456e;
   border: none;
   border-radius: 3px;
   box-sizing: border-box;
   cursor: pointer;
+  font: inherit;
+  font-weight: bold;
   padding: 0 20px;
-  text-decoration: none;
   color: #f9f6f2;
-  height: 40px;
-  line-height: 42px; }
+  height: 2.5em; }
 
 .game-container {
   margin-top: 40px;

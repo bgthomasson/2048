@@ -11,7 +11,7 @@ $tile-border-radius: 3px;
 
 $mobile-threshold: $field-width + 20px;
 
-$text-color: #404040;
+$text-color: #222222;
 $bright-text-color: #f9f6f2;
 
 $tile-color: #eee4da;
@@ -32,7 +32,7 @@ $transition-speed: 100ms;
 body {
     margin: 0 auto;
     padding: 0;
-    background: #241709; /* thin line between chocolate and doodoo color tho */
+    background: #241709; 
     color: $text-color;
     font-family: "Open Sans", sans-serif; 
     font-size: 0.925em; 
@@ -48,16 +48,15 @@ body {
         display: flex;
         align-items: center;
         justify-content: space-between; 
+        margin-top: .5em;
     }
 }
 
 h1 {
     font-size: 3em;
-    font-weight: bold;
     margin: 0;
     text-align: center;
 }
-
 
 @keyframes move-up {
     0% {
@@ -74,7 +73,6 @@ h1 {
 .score-container, .best-container {
     $height: 1.25em;
     position: relative;
-    display: inline-block;
     background: $score-color;
     padding: 15px 25px;
     font-size: $height;
@@ -83,7 +81,6 @@ h1 {
     font-weight: bold;
     border-radius: 3px;
     color: white;
-    margin-top: 8px;
     text-align: center;
 
         &:after {
@@ -120,12 +117,6 @@ h1 {
     content: "Best"
 }
 
-p {
-    margin-top: 0;
-    margin-bottom: .666em;
-    line-height: 1.35;
-}
-
 a {
     color: $text-color;
     font-weight: bold;
@@ -134,11 +125,10 @@ a {
 }
 
 footer {
-    margin-top: 50px;
+    margin-top: 3em;
     background-color: #faf8ef;
     padding: 1em; 
 }
-
 
 @keyframes fade-in {
     0% {
@@ -151,17 +141,16 @@ footer {
 }
 
 button {
-    display: inline-block;
     background: $button-color;
     border: none;
     border-radius: 3px;
     box-sizing: border-box;
     cursor: pointer;
+    font: inherit;
+    font-weight: bold;
     padding: 0 20px;
-    text-decoration: none;
     color: $bright-text-color;
-    height: 40px;
-    line-height: 42px;
+    height: 2.5em;
 }
 
 // Game field mixin used to render CSS at different width
@@ -292,102 +281,102 @@ button {
 @include game-field;
 
 .tile {
-position: absolute; // Makes transforms relative to the top-left corner
+    position: absolute; // Makes transforms relative to the top-left corner
 
-.tile-inner {
-    border-radius: $tile-border-radius;
-    background: $tile-color;
-    text-align: center;
-    font-weight: bold;
-    z-index: 10;
-    font-size: 55px;
-}
-
-// Movement transition
-transition: $transition-speed ease-in-out;
-transition-property: transform;
-
-$base: 2;
-$exponent: 1;
-$limit: 11;
-
-// Colors for all 11 states, false = no special color
-$special-colors: false false, // 2
-  false false, // 4
-  #f78e48 true, // 8
-  #fc5e2e true, // 16
-  #ff3333 true, // 32
-  #ff0000 true, // 64
-  false true, // 128
-  false true, // 256
-  false true, // 512
-  false true, // 1024
-  false true; // 2048
-
-// Build tile colors
-@while $exponent <= $limit {
-$power: pow($base, $exponent);
-
-&.tile-#{$power} .tile-inner {
-    // Calculate base background color
-    $gold-percent: ($exponent - 1) / ($limit - 1) * 100;
-    $mixed-background: mix($tile-gold-color, $tile-color, $gold-percent);
-
-    $nth-color: nth($special-colors, $exponent);
-
-    $special-background: nth($nth-color, 1);
-    $bright-color: nth($nth-color, 2);
-
-    @if $special-background {
-    $mixed-background: mix($special-background, $mixed-background, 55%);
-}
-
-@if $bright-color {
-    color: $bright-text-color;
-}
-
-// Set background
-background: $mixed-background;
-
-// Add glow
-$glow-opacity: max($exponent - 4, 0) / ($limit - 4);
-
-@if not $special-background {
-    box-shadow: 0 0 30px 10px rgba($tile-gold-glow-color, $glow-opacity / 1.8),
-    inset 0 0 0 1px rgba(white, $glow-opacity / 3);
-}
-
-// Adjust font size for bigger numbers
-@if $power >= 100 and $power < 1000 {
-    font-size: 45px;
-
-    // Media queries placed here to avoid carrying over the rest of the logic
-    @include smaller($mobile-threshold) {
-    font-size: 25px;
+    .tile-inner {
+        border-radius: $tile-border-radius;
+        background: $tile-color;
+        text-align: center;
+        font-weight: bold;
+        z-index: 10;
+        font-size: 55px;
     }
-} @else if $power >= 1000 {
-    font-size: 35px;
 
-    @include smaller($mobile-threshold) {
-        font-size: 15px;
+    // Movement transition
+    transition: $transition-speed ease-in-out;
+    transition-property: transform;
+
+    $base: 2;
+    $exponent: 1;
+    $limit: 11;
+
+    // Colors for all 11 states, false = no special color
+    $special-colors: false false, // 2
+    false false, // 4
+    #f78e48 true, // 8
+    #fc5e2e true, // 16
+    #ff3333 true, // 32
+    #ff0000 true, // 64
+    false true, // 128
+    false true, // 256
+    false true, // 512
+    false true, // 1024
+    false true; // 2048
+
+    // Build tile colors
+    @while $exponent <= $limit {
+    $power: pow($base, $exponent);
+
+    &.tile-#{$power} .tile-inner {
+        // Calculate base background color
+        $gold-percent: ($exponent - 1) / ($limit - 1) * 100;
+        $mixed-background: mix($tile-gold-color, $tile-color, $gold-percent);
+
+        $nth-color: nth($special-colors, $exponent);
+
+        $special-background: nth($nth-color, 1);
+        $bright-color: nth($nth-color, 2);
+
+        @if $special-background {
+            $mixed-background: mix($special-background, $mixed-background, 55%);
+        }
+
+        @if $bright-color {
+            color: $bright-text-color;
+        }
+
+        // Set background
+        background: $mixed-background;
+
+        // Add glow
+        $glow-opacity: max($exponent - 4, 0) / ($limit - 4);
+
+        @if not $special-background {
+            box-shadow: 0 0 30px 10px rgba($tile-gold-glow-color, $glow-opacity / 1.8),
+            inset 0 0 0 1px rgba(white, $glow-opacity / 3);
+        }
+
+        // Adjust font size for bigger numbers
+        @if $power >= 100 and $power < 1000 {
+            font-size: 45px;
+
+            // Media queries placed here to avoid carrying over the rest of the logic
+            @include smaller($mobile-threshold) {
+            font-size: 25px;
+            }
+        } @else if $power >= 1000 {
+            font-size: 35px;
+
+            @include smaller($mobile-threshold) {
+                font-size: 15px;
+            }
+        }
     }
-}
-}
 
-$exponent: $exponent + 1;
-}
+    $exponent: $exponent + 1;
+    }
 
-// Super tiles (above 2048)
-&.tile-super .tile-inner {
-color: $bright-text-color;
-background: mix(#333, $tile-gold-color, 95%);
+    // Super tiles (above 2048)
+    &.tile-super .tile-inner {
+        color: $bright-text-color;
+        background: mix(#333, $tile-gold-color, 95%);
 
-font-size: 30px;
+        font-size: 30px;
 
-@include smaller($mobile-threshold) {
-font-size: 10px;
-}
-}
+        @include smaller($mobile-threshold) {
+            font-size: 10px;
+        }
+    }
 }
 
 @keyframes appear {
